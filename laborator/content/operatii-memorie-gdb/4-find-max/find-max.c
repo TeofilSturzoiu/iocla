@@ -8,21 +8,20 @@
 	element_size este dimensiunea unui element din array
 	Se va parcurge vectorul arr, iar la fiecare iteratie sa va verifica
 	daca functia compare intoarce 1, caz in care elementul curent va fi
-	si cel maxim.
+	si cel maxim. 
 	Pentru a folosi corect aritmetica pe pointeri vom inmulti indexul curent
 	din parcurgere cu dimensiunea unui element.
 	Astfel, pentru accesarea elementului curent avem:
 	void *cur_element = (char *)arr + index * element_size;
 */
 
-void *find_max(void *arr, int n, int element_size,
+void *find_max(void *arr, int n, int element_size, 
 				int (*compare)(const void *, const void *)) {
 	void *max_elem = arr;
-
-	(void) n;
-	(void) element_size;
-	(void) compare;
-
+	for (int i = 1; i < n; i++) {
+		if (compare(max_elem, (char *)arr + i * element_size) != 1)
+			max_elem = (char *)arr + i * element_size;
+	}
 	return max_elem;
 }
 
@@ -34,7 +33,12 @@ void *find_max(void *arr, int n, int element_size,
 	mare decat cea de la adresa lui b, in caz contrar returneaza 0.
 */
 
-int compare(const void *a, const void *b);
+int compare(const void *a, const void *b)
+{
+	if (*((int*)a) > *((int*)b))
+		return 1;
+	return 0;
+}
 
 /*
 	Se citeste de la tastatura un vector si se cere sa se afle
@@ -49,7 +53,10 @@ int main() {
 	int *arr = malloc(n * sizeof(*arr));
 
 	for (int i = 0 ; i < n; ++i)
-		scanf("%d", &arr[i]);
+		scanf("%d", &arr[i]);    
+
+	int *res = (int*) find_max(arr, n, sizeof(int), compare);
+	printf("%d", *res);
 
 	free(arr);
 	return 0;
