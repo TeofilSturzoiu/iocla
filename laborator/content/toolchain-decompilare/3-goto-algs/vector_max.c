@@ -9,7 +9,17 @@ int main(void)
 	/* TODO: Implement finding the maximum value in the vector */
 	max = v[0];
 	i = 1;
+L1:
+	if (i >= sizeof(v) / sizeof(v[0])) {
+		goto L2;
+	}
+	if (max < v[i])
+		max = v[i];
+	i++;
+	goto L1;
 
+L2:
+	printf("Elementul maxim din vector este: %d", max);
 	(void) i;
 	(void) max;
 }
