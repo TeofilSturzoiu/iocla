@@ -6,7 +6,7 @@ int main(void)
 	int dest = v[2]; /* 15 */
 	int start = 0;
 	int end = sizeof(v) / sizeof(int) - 1;
-	
+
 	/* TODO: Implement binary search */
 	int middle;
 L3:
@@ -15,16 +15,13 @@ L3:
 		goto L1;
 	}
 	if (dest > v[middle]) {
-		start = middle;
+		start = middle + 1;
 		goto L3;
 	}
 	if (dest < v[middle]) {
-		end = middle;
+		end = middle - 1;
 		goto L3;
 	}
-	(void) dest;
-	(void) start;
-	(void) end;
 
 L1:
 	printf("Elementul a fost gasit");
