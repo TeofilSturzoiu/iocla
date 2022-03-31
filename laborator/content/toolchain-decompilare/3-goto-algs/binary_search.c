@@ -8,7 +8,25 @@ int main(void)
 	int end = sizeof(v) / sizeof(int) - 1;
 
 	/* TODO: Implement binary search */
-	(void) dest;
-	(void) start;
-	(void) end;
+	int middle;
+L3:
+	middle = (start + end) / 2;
+	if (dest == v[middle]) {
+		goto L1;
+	}
+	if (dest > v[middle]) {
+		start = middle + 1;
+		goto L3;
+	}
+	if (dest < v[middle]) {
+		end = middle - 1;
+		goto L3;
+	}
+
+L1:
+	printf("Elementul a fost gasit");
+	return 0;
+L2:
+	printf("Elementul NU a fost gasit");
+	return 0;
 }
