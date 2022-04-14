@@ -34,10 +34,39 @@ main:
     PRINTF32 `%s\x0`, string_remainder
     PRINTF32 `%hhu\n\x0`, ebx
 
+    ; Calculate quotient and remainder for 67254 / 1349.
+    xor eax, eax
+    xor edx, edx
+    
+    mov edx, dword [dividend2]
+    mov ax, dx
+    shr edx, 16
+    mov bx, word [divisor2]
+    div bx
 
-    ; TODO: Calculate quotient and remainder for 67254 / 1349.
+    PRINTF32 `%s\x0`, string_quotient
+    xor ebx, ebx
+    mov bx, ax
+    PRINTF32 `%hhu\n\x0`, ebx
+    xor ebx, ebx
+    mov bx, dx
+    PRINTF32 `%s\x0`, string_remainder
+    PRINTF32 `%hhu\n\x0`, ebx
 
-    ; TODO: Calculate quotient and remainder for 69094148 / 87621.
+    ; Calculate quotient and remainder for 69094148 / 87621.
+    xor eax, eax
+    xor edx, edx
+    mov eax, dword [dividend3]
+    mov ebx, dword [divisor3]
+    div ebx
+    PRINTF32 `%s\x0`, string_quotient
+    xor ebx, ebx
+    mov ebx, eax
+    PRINTF32 `%hhu\n\x0`, ebx
+    PRINTF32 `%s\x0`, string_remainder
+    xor ebx, ebx
+    mov ebx, edx
+    PRINTF32 `%hhu\n\x0`, ebx
     
     leave
     ret
